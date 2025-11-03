@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Archivo a revisar
+ARCHIVO="/var/log/syslog"
+
+# Texto que querés buscar
+TEXTO="ERROR"
+
+# Ruta donde Node Exporter lee las métricas
+METRICA="/var/lib/node_exporter/textfile_collector/archivo_check.prom"
+
+# Verificamos existencia del archivo
+if [ ! -f "$ARCHIVO" ]; then
+  echo "archivo_check 0" > "$METRICA"
+  exit 0
+fi
+
+# Buscamos el texto
+if grep -q "$TEXTO" "$ARCHIVO"; then
+  echo "archivo_check 1" > "$METRICA"
+else
+  echo "archivo_check 0" > "$METRICA"
+fi
+
+# Permisos correctos
+chown node_exporter:node_exporter "$METRICA"
