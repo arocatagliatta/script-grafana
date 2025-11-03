@@ -1,4 +1,5 @@
-#!/bin/bash sigo moficando para hacer pruebas
+#!/bin/bash sigo moficando para hacer pruebas ssh
+
 
 # Archivo a revisar
 ARCHIVO="/var/log/syslog"
